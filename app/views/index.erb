@@ -1,23 +1,29 @@
 <div class="container">
-  <h1>Welcome to Sinatra!</h1>
-  <p>Hello, world!</p>
+  <div class="feed_container">
+    <h3>Recent repos:</h3>
+    <ul>
+      <% @repos.each do |repo| %>
+        <li> <%= repo.svn_url %> </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="feed_container">
+    <h3>Recent gists:</h3>
+    <ul>
+      <% @gists.each do |gist| %>
+        <li> <a href=<%= gist.html_url %>><%= gist.html_url %></a></li>
+      <% end %>
+    </ul>
+  </div>
 
-  <table>
-    <tr>
-      <th>File Description</th>
-      <th>File Location</th>
-    </tr>
-    <tr>
-      <td>This view file</td>
-      <td><code><%= __FILE__.gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The layout file</td>
-      <td><code><%= File.expand_path('../layout.erb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The current controller</td>
-      <td><code><%= File.expand_path('../../controllers/index.rb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-  </table>
+
+  <div class="activity_container">
+    <h3>Recent activity:</h3>
+    <ul>
+      <% @activity.each do |action| %>
+        <li><%= action.payload.commits.first.message %><br><%= action.payload.commits.first.url %></li>
+      <% end %>
+    </ul>
+  </div>
+ 
 </div>
